@@ -1,0 +1,53 @@
+{% extends 'user/userbase.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col md-3">
+        <h3>CreateBook</h3>
+    </div>
+    <div class="col md-3"><a href="{% url 'author' %}" class="btn btn-warning"> Add Author</a>
+    </div>
+</div>
+
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ form.as_p}}
+<input type="submit" value="submit">
+</form>
+
+{% endblock %}
+
+<h1>List Book</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Book Name</th>
+        <th scope="col">Author</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for book in books %}
+    <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{book.title}}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.price}}</td>
+        <td>{{book.quantity}}</td>
+        <td><a href="{% url 'details' book.id %}" class="btn btn-primary">Details</a></td>
+
+        </td>
+
+    </tr>
+
+    {%endfor%}
+    </tbody>
+</table>
+
